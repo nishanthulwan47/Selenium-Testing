@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.List;
+
 public class SeleniumTest {
     public static void main(String[] args) throws InterruptedException {
         WebDriverManager.chromedriver().setup();
@@ -15,8 +17,17 @@ public class SeleniumTest {
         inputField.sendKeys("Nishant");
         WebElement inputField1 = driver.findElement(By.id("adjective"));
         inputField1.sendKeys("vishnu");
-        WebElement button = driver.findElement(By.id("adjective"));
-        button.submit();
+
+        List<WebElement> trainingResults = driver.findElements(By.className("training Message"));
+
+        for (int i = 0; i < 5; i++) {
+            inputField = driver.findElement(By.id("adjective"));
+            inputField.submit();
+            System.out.println("trainingResults.size() = " + trainingResults.size());
+        }
+        WebElement conclusionResult = driver.findElement(By.className("conclusionMessage"));
+        System.out.println("conclusionResult.getText() = " + conclusionResult.getText());
+
         Thread.sleep(5000);
         driver.quit();
     }
